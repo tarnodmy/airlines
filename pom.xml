@@ -37,6 +37,18 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -55,7 +67,59 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.1.6.RELEASE</version>
+			</plugin>
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>2.3.1</version>
+				<executions>
+					<execution>
+						<id>generate-java-server</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${basedir}/src/main/resources/static/api/api.yaml</inputSpec>
+							<language>spring</language>
+							<verbose>true</verbose>
+							<modelNameSuffix>Gen</modelNameSuffix>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<configOptions>
+								<title>${project.parent.name}</title>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<apiPackage>generated.rest.api</apiPackage>
+								<modelPackage>generated.rest.model</modelPackage>
+								<invokerPackage>generated.rest</invokerPackage>
+								<library>spring-boot</library>
+								<dateLibrary>java8</dateLibrary>
+								<async>true</async>
+								<java8>true</java8>
+								<supportJava6>false</supportJava6>
+								<interfaceOnly>true</interfaceOnly>
+								<delegatePattern>false</delegatePattern>
+								<serializableModel>true</serializableModel>
+								<useTags>true</useTags>
+								<implicitHeaders>false</implicitHeaders>
+								<swaggerDocketConfig>false</swaggerDocketConfig>
+								<useBeanValidation>false</useBeanValidation>
+								<useOptional>true</useOptional>
+								<debugSupportingFiles>true</debugSupportingFiles>
+								<debugSwagger>true</debugSwagger>
+								<debugOperations>true</debugOperations>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
+
 	</build>
 
 </project>
