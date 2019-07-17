@@ -8,3 +8,5 @@ deploy:
   api_key:
     secure: "$API_KEY"
     app: clv-akademie-2019
+  on:
+    all_branches: true
