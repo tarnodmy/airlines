@@ -15,7 +15,6 @@
 	<description>Projekt CLV akademie</description>
 
 	<properties>
-		<java.version>10</java.version>
 		<jackson-version>2.9.4</jackson-version>
 	</properties>
 
