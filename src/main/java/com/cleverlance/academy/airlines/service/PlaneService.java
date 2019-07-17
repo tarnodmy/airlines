@@ -15,21 +15,21 @@ public class PlaneService implements IPlaneService {
 
     @Override
     public List<Plane> getAllPlanes() {
-        return planeRepository.getAllPlanes();
+        return planeRepository.findAll();
     }
 
     @Override
     public void deletePlane(final Long id) {
-        planeRepository.deletePlane(id);
+        planeRepository.deleteById(id);
     }
 
     @Override
     public void updatePlane(final Plane plane) {
-        planeRepository.updatePlane(plane);
+        planeRepository.saveAndFlush(plane);
     }
 
     @Override
     public void createPlane(final Plane plane) {
-        planeRepository.createPlane(plane);
+        planeRepository.saveAndFlush(plane);
     }
 }
