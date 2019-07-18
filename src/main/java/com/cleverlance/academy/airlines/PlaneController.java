@@ -1,6 +1,5 @@
 package com.cleverlance.academy.airlines;
 
-import com.cleverlance.academy.airlines.client.AirportClient;
 import com.cleverlance.academy.airlines.model.Plane;
 import com.cleverlance.academy.airlines.service.IHangarService;
 import com.cleverlance.academy.airlines.service.IPlaneService;
@@ -23,12 +22,8 @@ public class PlaneController {
     @Autowired
     private IHangarService hangarService;
 
-    @Autowired
-    private AirportClient airportClient;
-
     @RequestMapping(path = "/planes", method = RequestMethod.GET)
     public List<Plane> getPlanes() {
-        airportClient.getAllAirports();
 
         return planeService.getAllPlanes();
     }
