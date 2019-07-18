@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,8 +36,8 @@ public class AirportService implements IAirportService {
 
         final Map<String, Destination> apiAirportsMap = apiAirports
                 .stream().collect(Collectors.toMap(Destination::getCode, item -> item));
-        addAirports(cachedAirportsMap, apiAirportsMap);
-        deleteAirports(cachedAirportsMap, apiAirportsMap);
+        addAirports(new HashMap<>(cachedAirportsMap), new HashMap<>(apiAirportsMap));
+        deleteAirports(new HashMap<>(cachedAirportsMap), new HashMap<>(apiAirportsMap));
     }
 
     private void addAirports(final Map<String, Destination> cachedAirportsMap,
