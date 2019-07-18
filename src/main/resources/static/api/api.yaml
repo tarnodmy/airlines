@@ -7,8 +7,9 @@ host: api.example.com
 schemes:
   - https
 paths:
-  /users:
+  /planes:
     get:
+      operationId: getPlanes
       summary: Returns a list of users.
       description: Optional extended description in Markdown.
       produces:
@@ -16,3 +17,20 @@ paths:
       responses:
         200:
           description: OK
+          schema:
+            $ref: '#/definitions/PlaneList'
+
+definitions:
+  PlaneList:
+    type: array
+    items:
+      $ref: '#/definitions/Plane'
+  Plane:
+    type: object
+    properties:
+      registrationCode:
+        type: string
+      firstClass:
+        type: integer
+      economy:
+        type: integer
