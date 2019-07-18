@@ -4,25 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Hangar {
+public class Destination {
 
     @Id
     @GeneratedValue
-    private Long hangarId;
+    private Long destinationId;
+
+    private String code;
+
     private String name;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Plane> planes;
-
 }

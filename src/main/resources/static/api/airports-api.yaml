@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  title: Sample API
+  description: API description in Markdown.
+  version: 1.0.0
+host: airlabs.co
+schemes:
+  - https
+paths:
+  /api/v6/airports:
+    get:
+      operationId: getAllAirports
+      tags:
+        - Airport
+      summary: Returns a list of airports
+      description: List of airports
+      parameters:
+        - in: query
+          name: api_key
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Response'
+
+definitions:
+  Response:
+    type: object
+    properties:
+      request:
+        type: object
+      response:
+        $ref: '#/definitions/AirportList'
+  AirportList:
+    type: array
+    items:
+      $ref: '#/definitions/Airport'
+  Airport:
+    type: object
+    properties:
+      code:
+        type: string
+      name:
+        type: string
