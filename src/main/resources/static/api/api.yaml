@@ -9,6 +9,8 @@ schemes:
 paths:
   /planes:
     get:
+      tags:
+        - Planes
       operationId: getPlanes
       summary: Returns a list of users.
       description: Optional extended description in Markdown.

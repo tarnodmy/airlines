@@ -1,9 +1,14 @@
 package com.cleverlance.academy.airlines;
 
+import com.cleverlance.academy.airlines.mapper.PlaneMapper;
 import com.cleverlance.academy.airlines.model.Plane;
 import com.cleverlance.academy.airlines.service.IHangarService;
 import com.cleverlance.academy.airlines.service.IPlaneService;
+import generated.rest.api.PlanesApi;
+import generated.rest.model.PlaneGen;
+import generated.rest.model.PlaneListGen;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @RestController
-public class PlaneController {
+public class PlaneController implements PlanesApi {
 
     @Autowired
     private IPlaneService planeService;
@@ -22,10 +29,17 @@ public class PlaneController {
     @Autowired
     private IHangarService hangarService;
 
-    @RequestMapping(path = "/planes", method = RequestMethod.GET)
-    public List<Plane> getPlanes() {
+    @Autowired
+    private PlaneMapper planeMapper;
 
-        return planeService.getAllPlanes();
+    @RequestMapping(path = "/planes", method = RequestMethod.GET)
+    @Override
+    public CompletableFuture<ResponseEntity<PlaneListGen>> getPlanes() {
+        final List<Plane> result = planeService.getAllPlanes();
+        List<PlaneGen> responseList = result.stream().map(item -> planeMapper.convertToPlaneGen(item)).collect(Collectors.toList());
+        PlaneListGen response = new PlaneListGen();
+        response.addAll(responseList);
+        return new CompletableFuture<>(ResponseEntity.ok(response));
     }
 
     @RequestMapping(path = "/planes/{registrationCode}", method = RequestMethod.GET)
