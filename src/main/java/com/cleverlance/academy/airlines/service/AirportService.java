@@ -22,12 +22,12 @@ public class AirportService implements IAirportService {
 
     @Override
     public List<Destination> getAllAirports() {
-        return airportClient.getAllAirports();
+        return destinationRepository.findAll();
     }
 
     @Scheduled(fixedRate = 3600000)
     private void updateAirports() {
-        final List<Destination> apiAirports = getAllAirports();
+        final List<Destination> apiAirports = airportClient.getAllAirports();
         final List<Destination> cachedAirports = destinationRepository.findAll();
 
         final Map<String, Destination> cachedAirportsMap = cachedAirports
