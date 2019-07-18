@@ -13,7 +13,7 @@ public class ClientConfig {
     public ApiClient apiClient() {
         final ApiClient apiClient = new ApiClient();
 
-        apiClient.setBasePath("http://airlabs.co");
+        apiClient.setBasePath("TODO");
         apiClient.setHttpClient(ClientBuilder.newBuilder().build());
 
         return apiClient;
