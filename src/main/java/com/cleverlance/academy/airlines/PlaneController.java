@@ -39,7 +39,7 @@ public class PlaneController implements PlanesApi {
         List<PlaneGen> responseList = result.stream().map(item -> planeMapper.convertToPlaneGen(item)).collect(Collectors.toList());
         PlaneListGen response = new PlaneListGen();
         response.addAll(responseList);
-        return new CompletableFuture<>(ResponseEntity.ok(response));
+        return CompletableFuture.completedFuture(ResponseEntity.ok(response));
     }
 
     @RequestMapping(path = "/planes/{registrationCode}", method = RequestMethod.GET)
